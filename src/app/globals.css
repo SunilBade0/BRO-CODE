@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #020617; /* Deep slate / black for Persona 3 midnight hour feel */
+  --foreground: #f8fafc;
+  --p3-blue: #0088cc;
+  --p3-blue-light: #33aadd;
+  --p3-dark: #0f172a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-p3-blue: var(--p3-blue);
+  --color-p3-blue-light: var(--p3-blue-light);
+  --color-p3-dark: var(--p3-dark);
+  --font-sans: 'Inter', sans-serif;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: radial-gradient(circle at 10% 20%, rgba(0, 136, 204, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 90% 80%, rgba(0, 136, 204, 0.1) 0%, transparent 40%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Persona 3 Dotted Texture Overlay */
+.p3-texture {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 8px 8px;
+  z-index: 0;
+}
+
+/* Sharp Angled Containers */
+.p3-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  border-left: 4px solid var(--p3-blue);
+  box-shadow: 4px 4px 0px rgba(0, 136, 204, 0.2);
+  transition: all 0.3s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+.p3-card:hover {
+  box-shadow: 8px 8px 0px rgba(0, 136, 204, 0.4);
+  transform: translateY(-2px);
+}
+
+.p3-button {
+  background: var(--p3-blue);
+  color: white;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition: all 0.2s;
+}
+
+.p3-button:hover {
+  background: white;
+  color: var(--p3-blue);
 }

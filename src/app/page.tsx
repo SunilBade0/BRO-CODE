@@ -1,69 +1,84 @@
-import Image from "next/image";
+import React from "react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-24 relative overflow-hidden">
+      
+      {/* Background Decorative Elements */}
+      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-p3-blue opacity-20 rounded-full blur-[120px]" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-blue-600 opacity-10 rounded-full blur-[150px]" />
+
+      <div className="z-10 w-full max-w-5xl flex flex-col lg:flex-row gap-12 items-center justify-between">
+        
+        {/* Left Side: Branding */}
+        <div className="flex-1 space-y-8">
+          <div className="inline-block px-4 py-1 p3-card border-l-4 border-white text-white font-black tracking-widest text-sm uppercase mb-4">
+            Operation: Midnight
+          </div>
+          
+          <h1 className="text-6xl lg:text-8xl font-black text-white leading-tight uppercase">
+            <span className="block text-p3-blue drop-shadow-[0_0_15px_rgba(0,136,204,0.8)]">S.E.E.S.</span>
+            Secure
+            <span className="block text-3xl lg:text-5xl mt-2 text-slate-300">Electronic Examination System</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          
+          <p className="text-slate-400 text-lg max-w-md font-semibold leading-relaxed">
+            Zero-Trust Medical Records & Patient Management. Protect your PHI from the shadows.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Right Side: Auth / Entry Card */}
+        <div className="w-full max-w-md p3-card p-10 relative">
+          
+          {/* Decorative Corner accent */}
+          <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-p3-blue to-transparent opacity-50" />
+
+          <h2 className="text-2xl font-black uppercase tracking-wider text-white mb-2">System Access</h2>
+          <p className="text-sm text-p3-blue-light font-bold mb-8 uppercase tracking-widest">Authentication Required</p>
+
+          <form className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Evoker ID (Email)</label>
+              <input 
+                type="email" 
+                className="w-full bg-slate-900/80 border border-slate-700 focus:border-p3-blue p-4 text-white outline-none transition-colors"
+                placeholder="doctor@sees.med"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Passcode</label>
+              <input 
+                type="password" 
+                className="w-full bg-slate-900/80 border border-slate-700 focus:border-p3-blue p-4 text-white outline-none transition-colors"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <button 
+              type="button" 
+              className="w-full p3-button py-4 mt-4 text-lg hover:shadow-[0_0_20px_rgba(0,136,204,0.6)]"
+            >
+              Initiate Access
+            </button>
+          </form>
+
+          <div className="mt-8 pt-6 border-t border-slate-800 text-center">
+            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">
+              Protected by AES-256 Encryption
+            </p>
+          </div>
         </div>
-      </main>
-    </div>
+
+      </div>
+
+      {/* Footer / Team Details */}
+      <footer className="absolute bottom-6 left-0 w-full text-center z-10 pointer-events-none">
+        <p className="text-xs text-slate-500 font-bold tracking-widest uppercase">
+          Developed by Team BRO CODE (53) // Build Secure Hackathon 2026
+        </p>
+      </footer>
+
+    </main>
   );
 }
