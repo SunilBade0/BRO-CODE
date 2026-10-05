@@ -140,6 +140,32 @@ export default function Dashboard() {
             </div>
           </div>
           
+          {/* Security Controls */}
+          <div className="glass-card p-6 border border-white/10 bg-black shadow-2xl space-y-4">
+             <h3 className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Defense Systems</h3>
+             <button 
+                onClick={() => router.push("/threat-intel")}
+                className="w-full text-left px-4 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 rounded-xl transition-colors group flex items-center justify-between"
+             >
+                <div>
+                   <div className="text-red-400 font-bold text-sm">Ring-0 Telemetry</div>
+                   <div className="text-red-500/60 text-[10px] uppercase tracking-widest mt-0.5">ML Kill-Switch Active</div>
+                </div>
+                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_#ef4444]"></div>
+             </button>
+
+             <button 
+                onClick={() => window.open("/api/admin/export", "_blank")}
+                className="w-full text-left px-4 py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-xl transition-colors group flex items-center justify-between"
+             >
+                <div>
+                   <div className="text-cyan-400 font-bold text-sm">Decoy Honeypot</div>
+                   <div className="text-cyan-500/60 text-[10px] uppercase tracking-widest mt-0.5">Shadow Routing Ready</div>
+                </div>
+                <div className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4]"></div>
+             </button>
+          </div>
+
           {/* Activity Log */}
           <div className="glass-card p-6 flex-1 flex flex-col min-h-[300px] border border-white/10 bg-black shadow-2xl">
             <div className="flex justify-between items-center mb-6">
