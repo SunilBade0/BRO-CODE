@@ -33,25 +33,28 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-24 relative overflow-hidden">
       
+      {/* Dynamic Scanline */}
+      <div className="scanline"></div>
+
       {/* Background Decorative Elements */}
-      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-p3-blue opacity-20 rounded-full blur-[120px]" />
+      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-p3-blue opacity-20 rounded-full blur-[120px] animate-pulse" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-blue-600 opacity-10 rounded-full blur-[150px]" />
 
       <div className="z-10 w-full max-w-5xl flex flex-col lg:flex-row gap-12 items-center justify-between">
         
         {/* Left Side: Branding */}
         <div className="flex-1 space-y-8">
-          <div className="inline-block px-4 py-1 p3-card border-l-4 border-white text-white font-black tracking-widest text-sm uppercase mb-4">
+          <div className="inline-block px-4 py-1 p3-card border-l-4 border-white text-white font-black tracking-widest text-sm uppercase mb-4 glitch-hover">
             Operation: Midnight
           </div>
           
-          <h1 className="text-6xl lg:text-8xl font-black text-white leading-tight uppercase">
+          <h1 className="text-6xl lg:text-8xl font-black text-white leading-tight uppercase glitch-hover transition-transform hover:scale-105 duration-300">
             <span className="block text-p3-blue drop-shadow-[0_0_15px_rgba(0,136,204,0.8)]">S.E.E.S.</span>
             Secure
             <span className="block text-3xl lg:text-5xl mt-2 text-slate-300">Electronic Examination System</span>
           </h1>
           
-          <p className="text-slate-400 text-lg max-w-md font-semibold leading-relaxed">
+          <p className="text-slate-400 text-lg max-w-md font-semibold leading-relaxed border-l-2 border-slate-700 pl-4 py-2">
             Zero-Trust Medical Records & Patient Management. Protect your PHI from the shadows.
           </p>
         </div>
