@@ -75,6 +75,23 @@ body {
   100% { transform: translate(0px, 0px) scale(1); }
 }
 
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+.animate-float {
+  animation: float-up 10s ease-in infinite;
+}
+
 .animate-blob {
   animation: blob 7s infinite alternate ease-in-out;
 }
