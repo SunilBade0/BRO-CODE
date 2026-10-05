@@ -29,24 +29,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#09090b]">
       
-      {/* 
-        PREMIUM BACKGROUND ANIMATIONS 
-        A wildly blurred rotating conic gradient mimicking a digital aurora.
-      */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
-        <div 
-          className="w-[100vw] h-[100vw] max-w-[1000px] max-h-[1000px] animate-spin-slow opacity-80"
-          style={{
-            background: 'conic-gradient(from 0deg, transparent 0%, #6366f1 20%, #a855f7 40%, #ec4899 60%, #3b82f6 80%, transparent 100%)',
-            filter: 'blur(120px)',
-            borderRadius: '50%'
-          }}
-        />
-      </div>
 
-      {/* Floating ambient orbs for extra depth */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-500/30 rounded-full blur-[100px] animate-blob z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/30 rounded-full blur-[100px] animate-blob animation-delay-2000 z-0" />
 
       {/* Centerpiece: The Login Card */}
       <div className="z-10 w-full max-w-[420px] mx-4 relative group">

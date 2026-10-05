@@ -86,20 +86,7 @@ export default function Dashboard() {
   return (
     <main className="min-h-screen p-6 lg:p-12 relative bg-[#09090b] text-white overflow-hidden flex flex-col">
       
-      {/* PREMIUM BACKGROUND ANIMATIONS */}
-      <div className="fixed inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen opacity-40">
-        <div 
-          className="w-[100vw] h-[100vw] max-w-[1200px] max-h-[1200px] animate-spin-slow"
-          style={{
-            background: 'conic-gradient(from 0deg, transparent 0%, rgba(168, 85, 247, 0.5) 25%, rgba(59, 130, 246, 0.5) 50%, rgba(236, 72, 153, 0.5) 75%, transparent 100%)',
-            filter: 'blur(150px)',
-            borderRadius: '50%'
-          }}
-        />
-      </div>
 
-      <div className="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] animate-blob mix-blend-screen pointer-events-none z-0" />
-      <div className="fixed bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[150px] animate-blob animation-delay-2000 mix-blend-screen pointer-events-none z-0" />
 
       {/* Header */}
       <header className="flex justify-between items-center mb-10 z-10">
