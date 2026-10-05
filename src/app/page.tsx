@@ -1,6 +1,35 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setIsAuthenticating(true);
+
+    // Simulate secure backend verification delay
+    setTimeout(() => {
+      // Dummy Secure Authentication (Hackathon Prototype)
+      // Accept doctor@sees.med with password123
+      if (email === "doctor@sees.med" && password === "password123") {
+        // Issue dummy token (stored in session storage for simple prototype auth)
+        sessionStorage.setItem("sees_auth_token", "dummy_secure_token_abc123");
+        router.push("/dashboard");
+      } else {
+        setError("Invalid Evoker ID or Passcode. Access Denied.");
+        setIsAuthenticating(false);
+      }
+    }, 800);
+  };
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-6 lg:p-24 relative overflow-hidden">
       
@@ -36,13 +65,16 @@ export default function Home() {
           <h2 className="text-2xl font-black uppercase tracking-wider text-white mb-2">System Access</h2>
           <p className="text-sm text-p3-blue-light font-bold mb-8 uppercase tracking-widest">Authentication Required</p>
 
-          <form className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-2">
               <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Evoker ID (Email)</label>
               <input 
                 type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-slate-900/80 border border-slate-700 focus:border-p3-blue p-4 text-white outline-none transition-colors"
                 placeholder="doctor@sees.med"
+                required
               />
             </div>
             
@@ -50,16 +82,26 @@ export default function Home() {
               <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Passcode</label>
               <input 
                 type="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-slate-900/80 border border-slate-700 focus:border-p3-blue p-4 text-white outline-none transition-colors"
                 placeholder="••••••••"
+                required
               />
             </div>
 
+            {error && (
+              <div className="text-red-400 text-xs font-bold uppercase tracking-wider border-l-2 border-red-500 pl-2">
+                {error}
+              </div>
+            )}
+
             <button 
-              type="button" 
-              className="w-full p3-button py-4 mt-4 text-lg hover:shadow-[0_0_20px_rgba(0,136,204,0.6)]"
+              type="submit" 
+              disabled={isAuthenticating}
+              className={`w-full p3-button py-4 mt-4 text-lg hover:shadow-[0_0_20px_rgba(0,136,204,0.6)] ${isAuthenticating ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              Initiate Access
+              {isAuthenticating ? "Verifying..." : "Initiate Access"}
             </button>
           </form>
 
