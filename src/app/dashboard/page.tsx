@@ -132,7 +132,7 @@ export default function Dashboard() {
         <div className="xl:col-span-1 flex flex-col gap-8">
           
           {/* User Profile Card */}
-          <div className="glass-card p-6 border border-white/5 bg-[#09090b]/60">
+          <div className="glass-card p-6 border border-white/10 bg-black shadow-2xl">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 p-[2px]">
                 <div className="w-full h-full bg-[#09090b] rounded-full flex items-center justify-center">
@@ -154,7 +154,7 @@ export default function Dashboard() {
           </div>
           
           {/* Activity Log */}
-          <div className="glass-card p-6 flex-1 flex flex-col min-h-[300px] border border-white/5 bg-[#09090b]/60">
+          <div className="glass-card p-6 flex-1 flex flex-col min-h-[300px] border border-white/10 bg-black shadow-2xl">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xs font-semibold text-white/50 uppercase tracking-widest">Audit Log</h3>
               <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_#6366f1]"></div>
@@ -178,7 +178,7 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="xl:col-span-3 glass-card p-8 flex flex-col border border-white/5 bg-[#09090b]/60">
+        <div className="xl:col-span-3 glass-card p-8 flex flex-col border border-white/10 bg-black shadow-2xl">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
             <div>
               <h2 className="text-2xl font-bold text-white mb-1 tracking-tight">Patient Directory</h2>
@@ -250,7 +250,7 @@ export default function Dashboard() {
       {/* Modals */}
       {selectedPatient && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl p-4 animate-in fade-in duration-200">
-          <div className="glass-card w-full max-w-md p-8 border border-white/10 shadow-2xl bg-[#09090b]/90 relative overflow-hidden">
+          <div className="glass-card w-full max-w-md p-8 border border-white/10 shadow-[0_0_50px_rgba(168,85,247,0.2)] bg-black relative overflow-hidden rounded-[24px]">
             
             {/* Modal decorative glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
@@ -273,7 +273,7 @@ export default function Dashboard() {
                     type="password" 
                     value={decryptKey}
                     onChange={(e) => setDecryptKey(e.target.value)}
-                    className="w-full glass-input p-4 text-center tracking-[1em] text-xl focus:bg-white/10"
+                    className="w-full bg-[#111] border border-white/10 rounded-xl p-4 text-center tracking-[1em] text-xl focus:border-purple-500/50 outline-none text-white transition-all"
                     placeholder="••••"
                     maxLength={4}
                     autoFocus
@@ -318,7 +318,7 @@ export default function Dashboard() {
 
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl p-4 animate-in fade-in duration-200">
-          <div className="glass-card w-full max-w-lg p-8 border border-white/10 shadow-2xl bg-[#09090b]/90 relative overflow-hidden">
+          <div className="glass-card w-full max-w-lg p-8 border border-white/10 shadow-[0_0_50px_rgba(168,85,247,0.2)] bg-black relative overflow-hidden rounded-[24px]">
             
             {/* Modal decorative glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
@@ -336,26 +336,26 @@ export default function Dashboard() {
             <form onSubmit={handleAddPatient} className="space-y-5">
               <div className="space-y-2">
                 <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest pl-1">Full Name</label>
-                <input required type="text" placeholder="John Doe" value={newPatient.name} onChange={e => setNewPatient({...newPatient, name: e.target.value})} className="w-full glass-input p-3.5 focus:bg-white/10 text-sm" />
+                <input required type="text" placeholder="John Doe" value={newPatient.name} onChange={e => setNewPatient({...newPatient, name: e.target.value})} className="w-full bg-[#111] border border-white/10 rounded-xl p-3.5 focus:border-purple-500/50 outline-none text-white transition-all text-sm" />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest pl-1">Status</label>
-                  <select value={newPatient.status} onChange={e => setNewPatient({...newPatient, status: e.target.value})} className="w-full glass-input p-3.5 focus:bg-white/10 text-sm [&>option]:bg-[#09090b]">
+                  <select value={newPatient.status} onChange={e => setNewPatient({...newPatient, status: e.target.value})} className="w-full bg-[#111] border border-white/10 rounded-xl p-3.5 focus:border-purple-500/50 outline-none text-white transition-all text-sm [&>option]:bg-black">
                     <option>Stable</option>
                     <option>Observation</option>
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest pl-1">Blood Group</label>
-                  <input required type="text" placeholder="A+" maxLength={3} value={newPatient.bloodType} onChange={e => setNewPatient({...newPatient, bloodType: e.target.value})} className="w-full glass-input p-3.5 focus:bg-white/10 text-sm uppercase" />
+                  <input required type="text" placeholder="A+" maxLength={3} value={newPatient.bloodType} onChange={e => setNewPatient({...newPatient, bloodType: e.target.value})} className="w-full bg-[#111] border border-white/10 rounded-xl p-3.5 focus:border-purple-500/50 outline-none text-white transition-all text-sm uppercase" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest pl-1">Condition Notes</label>
-                <textarea required placeholder="Patient is exhibiting..." value={newPatient.condition} onChange={e => setNewPatient({...newPatient, condition: e.target.value})} className="w-full glass-input p-3.5 min-h-[100px] resize-none focus:bg-white/10 text-sm" />
+                <textarea required placeholder="Patient is exhibiting..." value={newPatient.condition} onChange={e => setNewPatient({...newPatient, condition: e.target.value})} className="w-full bg-[#111] border border-white/10 rounded-xl p-3.5 min-h-[100px] resize-none focus:border-purple-500/50 outline-none text-white transition-all text-sm" />
               </div>
               
               <div className="pt-2">

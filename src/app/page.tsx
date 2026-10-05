@@ -35,10 +35,10 @@ export default function Home() {
       */}
       <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none mix-blend-screen">
         <div 
-          className="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] animate-spin-slow opacity-60"
+          className="w-[100vw] h-[100vw] max-w-[1000px] max-h-[1000px] animate-spin-slow opacity-80"
           style={{
-            background: 'conic-gradient(from 0deg, transparent 0%, #a855f7 25%, #3b82f6 50%, #ec4899 75%, transparent 100%)',
-            filter: 'blur(100px)',
+            background: 'conic-gradient(from 0deg, transparent 0%, #6366f1 20%, #a855f7 40%, #ec4899 60%, #3b82f6 80%, transparent 100%)',
+            filter: 'blur(120px)',
             borderRadius: '50%'
           }}
         />
@@ -52,12 +52,12 @@ export default function Home() {
       <div className="z-10 w-full max-w-[420px] mx-4 relative group">
         
         {/* Glowing border effect behind the card */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 via-indigo-500 to-purple-500 rounded-[26px] opacity-20 group-hover:opacity-40 transition duration-1000 blur-md"></div>
+        <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-indigo-500 to-purple-500 rounded-[28px] opacity-30 group-hover:opacity-60 transition duration-1000 blur-xl"></div>
         
-        <div className="glass-card p-10 relative bg-[#09090b]/80 border border-white/10 rounded-[24px]">
+        <div className="p-10 relative bg-black border border-white/5 rounded-[24px] shadow-2xl">
           
           <div className="flex justify-center mb-6">
-             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
+             <div className="w-16 h-16 rounded-2xl bg-black border border-white/10 flex items-center justify-center shadow-[0_0_30px_rgba(168,85,247,0.3)]">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -71,31 +71,31 @@ export default function Home() {
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
-              <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest pl-1">Email Address</label>
+              <label className="text-[11px] font-bold text-white/50 uppercase tracking-widest pl-1">Email Address</label>
               <input 
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full glass-input px-4 py-3.5 text-sm transition-all focus:bg-white/10"
+                className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-white/20 outline-none transition-all focus:border-purple-500/50 focus:bg-[#151515] focus:shadow-[0_0_20px_rgba(168,85,247,0.1)]"
                 placeholder="doctor@sees.med"
                 required
               />
             </div>
             
             <div className="space-y-2">
-              <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest pl-1">Password</label>
+              <label className="text-[11px] font-bold text-white/50 uppercase tracking-widest pl-1">Password</label>
               <input 
                 type="password" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full glass-input px-4 py-3.5 text-sm tracking-widest transition-all focus:bg-white/10"
+                className="w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-white/20 tracking-widest outline-none transition-all focus:border-purple-500/50 focus:bg-[#151515] focus:shadow-[0_0_20px_rgba(168,85,247,0.1)]"
                 placeholder="••••••••"
                 required
               />
             </div>
 
             {error && (
-              <div className="text-pink-400 text-sm font-medium p-3 rounded-xl bg-pink-500/10 border border-pink-500/20 text-center animate-in fade-in slide-in-from-top-2">
+              <div className="text-pink-400 text-sm font-medium p-3 rounded-xl bg-pink-950 border border-pink-500/30 text-center animate-in fade-in slide-in-from-top-2">
                 {error}
               </div>
             )}
