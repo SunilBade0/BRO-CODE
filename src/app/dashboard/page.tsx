@@ -155,6 +155,17 @@ export default function Dashboard() {
              </button>
 
              <button 
+                onClick={() => router.push("/mtd")}
+                className="w-full text-left px-4 py-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 rounded-xl transition-colors group flex items-center justify-between"
+             >
+                <div>
+                   <div className="text-indigo-400 font-bold text-sm">Advanced Cryptography</div>
+                   <div className="text-indigo-500/60 text-[10px] uppercase tracking-widest mt-0.5">Polymorphic MTD & FHE Wasm</div>
+                </div>
+                <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_8px_#6366f1]"></div>
+             </button>
+
+             <button 
                 onClick={() => window.open("/api/admin/export", "_blank")}
                 className="w-full text-left px-4 py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-xl transition-colors group flex items-center justify-between"
              >
