@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const url = request.nextUrl;
   
   // 1. HONEYPOT / DECOY ROUTES
@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
 
   // 3. TRIGGER THE TRAP
   if (decoyRoutes.some(route => url.pathname.includes(route))) {
-    console.log(`⚠️ HONEYPOT TRIGGERED! Attacker IP: ${request.ip || 'Unknown'} Route: ${url.pathname}`);
+    console.log(`⚠️ HONEYPOT TRIGGERED! Attacker Route: ${url.pathname}`);
     
     // Redirect them to the shadow dashboard, which looks real but is fake
     const response = NextResponse.redirect(new URL('/shadow-dashboard', request.url));
