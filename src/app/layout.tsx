@@ -20,9 +20,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-screen relative bg-slate-950 text-white cursor-none">
+      <body className="min-h-screen relative bg-[#09090b] text-white">
         <CursorTracker />
-        <div className="p3-texture" />
         <div className="relative z-10">{children}</div>
       </body>
     </html>

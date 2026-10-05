@@ -3,17 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Mock Data
 const INITIAL_PATIENTS = [
-  { id: "#P3-001", name: "Makoto Yuki", status: "Stable", condition: "Apathy Syndrome exposure. Resolved.", bloodType: "O" },
-  { id: "#P3-002", name: "Yukari Takeba", status: "Under Observation", condition: "Elevated stress levels. Minor fatigue.", bloodType: "A" },
-  { id: "#P3-003", name: "Junpei Iori", status: "Cleared", condition: "Physical trauma. Fully healed.", bloodType: "B" },
+  { id: "#P3-001", name: "Makoto Yuki", status: "Stable", condition: "Routine checkup complete.", bloodType: "O" },
+  { id: "#P3-002", name: "Yukari Takeba", status: "Observation", condition: "Minor fatigue, resting.", bloodType: "A" },
+  { id: "#P3-003", name: "Junpei Iori", status: "Cleared", condition: "Fully recovered.", bloodType: "B" },
 ];
 
 const INITIAL_LOGS = [
-  { time: "00:00:12", action: "System Initialized", user: "SYSTEM" },
-  { time: "00:02:45", action: "Failed Access Attempt", user: "UNKNOWN" },
-  { time: "00:05:30", action: "Doctor Logged In", user: "doctor@sees.med" },
+  { time: "00:00:12", action: "System Authenticated", user: "SYSTEM" },
+  { time: "00:05:30", action: "Active Session Started", user: "doctor@sees.med" },
 ];
 
 export default function Dashboard() {
@@ -53,7 +51,7 @@ export default function Dashboard() {
       setDecryptError("");
       addLog(`Decrypted PHI for ${selectedPatient.id}`);
     } else {
-      setDecryptError("INVALID DECRYPTION KEY.");
+      setDecryptError("Invalid Decryption Key");
       addLog(`Failed decryption attempt for ${selectedPatient.id}`);
     }
   };
@@ -67,7 +65,6 @@ export default function Dashboard() {
 
   const handleAddPatient = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate secure input validation (Sanitizing names)
     const sanitizedName = newPatient.name.replace(/[^a-zA-Z\s]/g, "");
     const newId = `#P3-00${patients.length + 1}`;
     
@@ -79,120 +76,116 @@ export default function Dashboard() {
       bloodType: newPatient.bloodType 
     }]);
     
-    addLog(`Added new secure record: ${newId}`);
+    addLog(`Created secure record: ${newId}`);
     setShowAddModal(false);
     setNewPatient({ name: "", status: "Stable", condition: "", bloodType: "" });
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <div className="text-p3-blue text-2xl font-black uppercase tracking-widest animate-pulse">
-          Decrypting PHI Data...
-        </div>
-      </div>
-    );
-  }
+  if (loading) return null;
 
   return (
-    <main className="min-h-screen p-6 lg:p-12 relative overflow-hidden">
+    <main className="min-h-screen p-6 lg:p-12 relative overflow-hidden flex flex-col">
       
-      <div className="fixed top-[-10%] right-[-5%] w-[400px] h-[400px] bg-p3-blue opacity-10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="fixed bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-600 opacity-5 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Animated Gradient Orbs */}
+      <div className="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px] animate-blob mix-blend-screen pointer-events-none" />
+      <div className="fixed bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-indigo-600/20 rounded-full blur-[150px] animate-blob animation-delay-2000 mix-blend-screen pointer-events-none" />
 
-      {/* Top Header */}
-      <header className="flex justify-between items-center mb-12 p3-card px-8 py-4 z-10 relative">
+      {/* Header */}
+      <header className="flex justify-between items-center mb-10 z-10">
         <div className="flex items-center gap-4">
-          <div className="px-3 py-1 bg-white text-p3-blue font-black tracking-widest text-sm uppercase">
-            SEES Secure
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/30">
+            S
           </div>
-          <h1 className="text-xl font-black uppercase tracking-widest text-white">
-            Medical Central Command
-          </h1>
+          <div>
+            <h1 className="text-xl font-bold text-white tracking-tight">SEES Secure</h1>
+            <p className="text-xs text-white/50 font-medium">Medical Central Command</p>
+          </div>
         </div>
         <button 
           onClick={() => {
             sessionStorage.removeItem("sees_auth_token");
             router.push("/");
           }}
-          className="text-slate-400 hover:text-white font-bold uppercase tracking-wider text-sm transition-colors"
+          className="text-white/60 hover:text-white font-medium text-sm transition-colors px-4 py-2 rounded-lg hover:bg-white/5"
         >
-          [ Terminate Session ]
+          Sign Out
         </button>
       </header>
 
-      {/* Dashboard Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 relative z-10 flex-1">
         
-        {/* Left Column: Stats & Logs */}
-        <div className="space-y-8 flex flex-col h-full">
-          <div className="p3-card p-6 border-l-4 border-p3-blue">
-            <h3 className="text-xs uppercase font-bold text-slate-400 tracking-widest mb-4">Current Clearance</h3>
-            <div className="text-3xl font-black text-white uppercase">Level 5 (Doctor)</div>
+        {/* Sidebar */}
+        <div className="lg:col-span-1 flex flex-col gap-6">
+          <div className="glass-card p-6 flex items-center justify-between">
+            <div>
+              <p className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-1">Clearance</p>
+              <h3 className="text-2xl font-bold text-white">Level 5</h3>
+            </div>
+            <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30">
+              <span className="text-green-400 font-bold">OK</span>
+            </div>
           </div>
           
-          <div className="p3-card p-6 border-l-4 border-red-500">
-            <h3 className="text-xs uppercase font-bold text-slate-400 tracking-widest mb-4">Active Threats</h3>
-            <div className="text-3xl font-black text-white uppercase">0 Detected</div>
-          </div>
-
-          <div className="p3-card p-6 flex-1 border-l-4 border-slate-600 overflow-hidden flex flex-col">
-            <h3 className="text-xs uppercase font-bold text-slate-400 tracking-widest mb-4">Security Audit Log</h3>
-            <div className="flex-1 overflow-y-auto space-y-3 pr-2 max-h-[300px]">
+          <div className="glass-card p-6 flex-1 flex flex-col min-h-[300px]">
+            <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">Activity Log</h3>
+            <div className="flex-1 overflow-y-auto space-y-4 pr-2">
               {logs.map((log, i) => (
-                <div key={i} className="text-xs font-mono border-b border-slate-800 pb-2">
-                  <span className="text-p3-blue-light">[{log.time}]</span> 
-                  <span className="text-white ml-2">{log.action}</span>
-                  <div className="text-slate-500 mt-1">USER: {log.user}</div>
+                <div key={i} className="flex gap-3 text-sm">
+                  <div className="text-indigo-400 font-mono text-xs pt-0.5">{log.time}</div>
+                  <div>
+                    <div className="text-white/90 font-medium">{log.action}</div>
+                    <div className="text-white/40 text-xs">{log.user}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Middle/Right Column: Patient Roster */}
-        <div className="lg:col-span-2 space-y-8">
-          <div className="p3-card p-8">
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h2 className="text-2xl font-black uppercase tracking-wider text-white mb-2">Encrypted Patient Roster</h2>
-                <p className="text-sm text-p3-blue-light font-bold uppercase tracking-widest">
-                  Data secured via AES-256
-                </p>
-              </div>
-              <button 
-                onClick={() => setShowAddModal(true)}
-                className="p3-button px-6 py-2 text-sm"
-              >
-                + Secure Add
-              </button>
+        {/* Main Content */}
+        <div className="lg:col-span-3 glass-card p-8 flex flex-col">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-1">Patient Database</h2>
+              <p className="text-sm text-white/50 font-medium">Data secured via client-side validation</p>
             </div>
+            <button 
+              onClick={() => setShowAddModal(true)}
+              className="gradient-btn px-6 py-2.5 text-sm rounded-lg"
+            >
+              Add Record
+            </button>
+          </div>
 
+          <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b-2 border-slate-700 text-xs uppercase tracking-widest text-slate-400 font-bold">
-                  <th className="pb-4 pl-2">Patient ID</th>
-                  <th className="pb-4">Alias</th>
+                <tr className="border-b border-white/10 text-xs font-semibold text-white/50 uppercase tracking-wider">
+                  <th className="pb-4 pl-4">ID</th>
+                  <th className="pb-4">Name</th>
                   <th className="pb-4">Status</th>
-                  <th className="pb-4">Actions</th>
+                  <th className="pb-4 text-right pr-4">Action</th>
                 </tr>
               </thead>
-              <tbody className="text-sm font-semibold">
+              <tbody className="text-sm">
                 {patients.map((p) => (
-                  <tr key={p.id} className="border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors">
-                    <td className="py-4 pl-2 text-p3-blue-light">{p.id}</td>
-                    <td className="py-4">{decrypted && selectedPatient?.id === p.id ? p.name : "ENCRYPTED"}</td>
+                  <tr key={p.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                    <td className="py-4 pl-4 text-white/70 font-mono">{p.id}</td>
+                    <td className="py-4 font-medium text-white/90">
+                      {decrypted && selectedPatient?.id === p.id ? p.name : "••••••••••"}
+                    </td>
                     <td className="py-4">
-                      <span className={p.status === "Stable" || p.status === "Cleared" ? "text-green-400" : "text-yellow-400"}>
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${p.status === 'Stable' || p.status === 'Cleared' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>
                         {p.status}
                       </span>
                     </td>
-                    <td className="py-4">
+                    <td className="py-4 text-right pr-4">
                       <button 
                         onClick={() => setSelectedPatient(p)}
-                        className="text-slate-400 hover:text-white uppercase text-xs border border-slate-700 px-3 py-1 hover:border-white transition-colors"
+                        className="text-indigo-400 font-medium hover:text-indigo-300 transition-colors opacity-0 group-hover:opacity-100"
                       >
-                        View File
+                        Decrypt
                       </button>
                     </td>
                   </tr>
@@ -203,80 +196,82 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Patient Decryption Modal */}
+      {/* Modals */}
       {selectedPatient && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="p3-card w-full max-w-lg p-8 border-l-4 border-p3-blue">
-            <h2 className="text-xl font-black uppercase tracking-wider text-white mb-6">Classified File: {selectedPatient.id}</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in fade-in duration-200">
+          <div className="glass-card w-full max-w-md p-8 border border-white/10 shadow-2xl">
+            <h2 className="text-xl font-bold text-white mb-2">Decrypt Record</h2>
+            <p className="text-sm text-white/50 mb-6">Patient {selectedPatient.id}</p>
             
             {!decrypted ? (
               <form onSubmit={handleDecrypt} className="space-y-4">
-                <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">
-                  Enter 2FA Decryption Key to view Protected Health Information (PHI). (Hint: 0000)
-                </p>
-                <input 
-                  type="password" 
-                  value={decryptKey}
-                  onChange={(e) => setDecryptKey(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 focus:border-p3-blue p-3 text-white outline-none tracking-widest text-center text-xl"
-                  placeholder="****"
-                  maxLength={4}
-                  autoFocus
-                />
-                {decryptError && <div className="text-red-500 font-bold text-xs uppercase">{decryptError}</div>}
-                <div className="flex gap-4 pt-4">
-                  <button type="button" onClick={closePatientModal} className="flex-1 bg-slate-800 text-white font-bold uppercase py-3 hover:bg-slate-700">Cancel</button>
-                  <button type="submit" className="flex-1 p3-button py-3">Decrypt</button>
+                <div className="space-y-2">
+                  <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Decryption PIN</label>
+                  <input 
+                    type="password" 
+                    value={decryptKey}
+                    onChange={(e) => setDecryptKey(e.target.value)}
+                    className="w-full glass-input p-3 text-center tracking-[1em] text-lg"
+                    placeholder="****"
+                    maxLength={4}
+                    autoFocus
+                  />
+                  <p className="text-xs text-white/30 text-center mt-2">(Hint: 0000)</p>
+                </div>
+                {decryptError && <div className="text-pink-400 text-sm font-medium text-center">{decryptError}</div>}
+                <div className="flex gap-3 pt-2">
+                  <button type="button" onClick={closePatientModal} className="flex-1 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium py-2.5 transition-colors">Cancel</button>
+                  <button type="submit" className="flex-1 gradient-btn py-2.5 rounded-lg">Verify</button>
                 </div>
               </form>
             ) : (
               <div className="space-y-6">
-                <div className="bg-green-500/10 border border-green-500/30 p-4">
-                  <h3 className="text-green-400 text-xs font-bold uppercase tracking-widest mb-2">Decryption Successful</h3>
-                  <div className="space-y-2 text-sm text-white">
-                    <p><span className="text-slate-400">Name:</span> {selectedPatient.name}</p>
-                    <p><span className="text-slate-400">Blood Type:</span> {selectedPatient.bloodType}</p>
-                    <p><span className="text-slate-400">Condition:</span> {selectedPatient.condition}</p>
+                <div className="bg-white/5 rounded-xl p-5 border border-white/10">
+                  <div className="space-y-3 text-sm text-white/90">
+                    <div className="flex justify-between"><span className="text-white/50">Full Name</span> <span className="font-medium">{selectedPatient.name}</span></div>
+                    <div className="flex justify-between"><span className="text-white/50">Blood Type</span> <span className="font-medium">{selectedPatient.bloodType}</span></div>
+                    <div className="pt-3 border-t border-white/10">
+                      <span className="block text-white/50 mb-1">Notes</span>
+                      <p>{selectedPatient.condition}</p>
+                    </div>
                   </div>
                 </div>
-                <button onClick={closePatientModal} className="w-full p3-button py-3">Close & Re-Encrypt</button>
+                <button onClick={closePatientModal} className="w-full rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium py-3 transition-colors">Close Record</button>
               </div>
             )}
           </div>
         </div>
       )}
 
-      {/* Add Patient Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="p3-card w-full max-w-lg p-8 border-l-4 border-p3-blue">
-            <h2 className="text-xl font-black uppercase tracking-wider text-white mb-6">Create Secure Record</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in fade-in duration-200">
+          <div className="glass-card w-full max-w-lg p-8 border border-white/10 shadow-2xl">
+            <h2 className="text-xl font-bold text-white mb-6">New Secure Record</h2>
             <form onSubmit={handleAddPatient} className="space-y-4">
               <div className="space-y-1">
-                <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Patient Name (Auto-Sanitized)</label>
-                <input required type="text" value={newPatient.name} onChange={e => setNewPatient({...newPatient, name: e.target.value})} className="w-full bg-slate-900 border border-slate-700 p-3 text-white outline-none" />
+                <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Full Name (Auto-Sanitizes)</label>
+                <input required type="text" value={newPatient.name} onChange={e => setNewPatient({...newPatient, name: e.target.value})} className="w-full glass-input p-3" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Status</label>
-                  <select value={newPatient.status} onChange={e => setNewPatient({...newPatient, status: e.target.value})} className="w-full bg-slate-900 border border-slate-700 p-3 text-white outline-none">
+                  <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Status</label>
+                  <select value={newPatient.status} onChange={e => setNewPatient({...newPatient, status: e.target.value})} className="w-full glass-input p-3 [&>option]:bg-[#09090b]">
                     <option>Stable</option>
-                    <option>Under Observation</option>
-                    <option>Critical</option>
+                    <option>Observation</option>
                   </select>
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Blood Type</label>
-                  <input required type="text" maxLength={3} value={newPatient.bloodType} onChange={e => setNewPatient({...newPatient, bloodType: e.target.value})} className="w-full bg-slate-900 border border-slate-700 p-3 text-white outline-none" />
+                  <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Blood Group</label>
+                  <input required type="text" maxLength={3} value={newPatient.bloodType} onChange={e => setNewPatient({...newPatient, bloodType: e.target.value})} className="w-full glass-input p-3" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-xs uppercase font-bold text-slate-400 tracking-wider">Medical Notes</label>
-                <textarea required value={newPatient.condition} onChange={e => setNewPatient({...newPatient, condition: e.target.value})} className="w-full bg-slate-900 border border-slate-700 p-3 text-white outline-none min-h-[100px]" />
+                <label className="text-xs font-semibold text-white/70 uppercase tracking-wide">Condition Notes</label>
+                <textarea required value={newPatient.condition} onChange={e => setNewPatient({...newPatient, condition: e.target.value})} className="w-full glass-input p-3 min-h-[100px] resize-none" />
               </div>
-              <div className="flex gap-4 pt-4">
-                <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 bg-slate-800 text-white font-bold uppercase py-3 hover:bg-slate-700">Cancel</button>
-                <button type="submit" className="flex-1 p3-button py-3">Encrypt & Save</button>
+              <div className="flex gap-3 pt-2">
+                <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium py-2.5 transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 gradient-btn py-2.5 rounded-lg">Save Record</button>
               </div>
             </form>
           </div>

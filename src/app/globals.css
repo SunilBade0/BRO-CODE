@@ -1,126 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020617; /* Deep slate / black for Persona 3 midnight hour feel */
-  --foreground: #f8fafc;
-  --p3-blue: #0088cc;
-  --p3-blue-light: #33aadd;
-  --p3-dark: #0f172a;
+  --background: #09090b; /* Very dark zinc */
+  --foreground: #fafafa;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-p3-blue: var(--p3-blue);
-  --color-p3-blue-light: var(--p3-blue-light);
-  --color-p3-dark: var(--p3-dark);
   --font-sans: 'Inter', sans-serif;
 }
 
 body {
   background-color: var(--background);
-  background-image: radial-gradient(circle at 10% 20%, rgba(0, 136, 204, 0.15) 0%, transparent 50%),
-                    radial-gradient(circle at 90% 80%, rgba(0, 136, 204, 0.1) 0%, transparent 40%),
-                    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-  background-attachment: fixed;
   color: var(--foreground);
   font-family: 'Inter', Arial, sans-serif;
   overflow-x: hidden;
-  animation: bg-pan 20s infinite alternate linear;
 }
 
-@keyframes bg-pan {
-  from { background-position: 0 0, 0 0, 0 0, 0 0; }
-  to { background-position: 100px 50px, -50px 100px, 20px 20px, 20px 20px; }
+/* Premium Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-/* Persona 3 Dotted Texture Overlay */
-.p3-texture {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 8px 8px;
-  z-index: 0;
-}
-
-/* Sharp Angled Containers */
-.p3-card {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  border-left: 4px solid var(--p3-blue);
-  box-shadow: 4px 4px 0px rgba(0, 136, 204, 0.2);
-  transition: all 0.3s ease;
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
-}
-
-.p3-card:hover {
-  box-shadow: 8px 8px 0px rgba(0, 136, 204, 0.4);
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
 
-.p3-button {
-  background: var(--p3-blue);
+/* Gradient Button */
+.gradient-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
   color: white;
-  text-transform: uppercase;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 0 10px rgba(0, 136, 204, 0.3);
-  position: relative;
-  overflow: hidden;
+  font-weight: 600;
+  border-radius: 16px;
+  border: none;
+  transition: all 0.3s ease;
+  background-size: 200% auto;
 }
 
-.p3-button::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transform: skewX(-20deg);
-  transition: all 0.5s;
-}
-
-.p3-button:hover::before {
-  left: 150%;
-}
-
-.p3-button:hover {
-  background: white;
-  color: var(--p3-blue);
-  box-shadow: 0 0 25px rgba(0, 136, 204, 0.8);
+.gradient-btn:hover {
+  background-position: right center;
+  box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.8);
   transform: scale(1.02);
 }
 
-.scanline {
-  width: 100%;
-  height: 2px;
-  background-color: rgba(0, 136, 204, 0.3);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  animation: scanline 8s linear infinite;
-  pointer-events: none;
+/* Input Fields */
+.glass-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  transition: all 0.3s ease;
 }
 
-@keyframes scanline {
-  0% { top: -5%; }
-  100% { top: 105%; }
+.glass-input:focus {
+  outline: none;
+  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
 }
 
-@keyframes glitch {
-  0% { transform: translate(0) }
-  20% { transform: translate(-2px, 2px) }
-  40% { transform: translate(-2px, -2px) }
-  60% { transform: translate(2px, 2px) }
-  80% { transform: translate(2px, -2px) }
-  100% { transform: translate(0) }
+/* Slowly rotating gradient orbs */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
 }
-.glitch-hover:hover {
-  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-  text-shadow: 2px 0 red, -2px 0 cyan;
+
+.animate-blob {
+  animation: blob 7s infinite alternate ease-in-out;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
