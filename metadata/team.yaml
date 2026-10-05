@@ -4,16 +4,16 @@
 # - If your team has 4 members: provide all 4 members.
 
 team:
-  team_id: ""
-  name: ""
+  team_id: "53"
+  name: "BRO CODE"
   repository: "https://github.com/SunilBade0/BRO-CODE" # URL of the newly created GitHub repository for this project
 
 members:
-  - name: ""
-    email: ""
-  - name: ""
-    email: ""
-  - name: ""
-    email: ""
-  - name: ""
-    email: ""
+  - name: "Sunil"
+    email: "sunil@example.com"
+  - name: "Rathan"
+    email: "rathan@example.com"
+  - name: "Spoorthi"
+    email: "spoorthi@example.com"
+  - name: "Chandini"
+    email: "chandini@example.com"
